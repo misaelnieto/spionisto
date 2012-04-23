@@ -1,12 +1,44 @@
-<html>
-<head>
-</head>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@master/macros/main"
+      i18n:domain="logografo">
 <body>
-  <h1>Congratulations!</h1>
+  <metal:content fill-slot="content">
+<div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header" i18n:translate="">Cameras</li>
+              <li class="active"><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Camera Number 10</h1>
 
-  <p>Your Grok application is up and running.
-  Edit <code>spionisto/app_templates/index.pt</code> to change
-  this page.</p>
-  <img tal:attributes="src static/evencaveman.jpg"/>
+            <img src="xxx.jpg" alt="Camera offline" width="640" height="480">
+
+            <p><a class="btn btn-primary btn-large">Learn more »</a></p>
+          </div>
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+
+    </div>
+  </metal:content>
 </body>
 </html>

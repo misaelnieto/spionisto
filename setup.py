@@ -25,6 +25,7 @@ setup(name='spionisto',
                         'zope.fanstatic',
                         'grokcore.startup',
                         # Add extra requirements here
+                        'js.bootstrap',
                         ],
       entry_points={
           'fanstatic.libraries': [

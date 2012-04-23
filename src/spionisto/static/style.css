@@ -1,4 +1,8 @@
-/* This is a silly style sheet solely used for demonstrating fanstatic. */
 body {
-  background-color: #eee;
+    padding-bottom: 40px;
+    padding-top: 60px;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
 }
