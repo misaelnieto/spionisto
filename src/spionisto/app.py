@@ -16,3 +16,8 @@ class Master(grok.View):
 class Index(grok.View):
     def update(self):
         resource.style.need()
+
+class About(grok.View):
+    def update(self):
+        resource.style.need()
+    

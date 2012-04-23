@@ -8,8 +8,8 @@
       i18n:domain="logografo">
 <body>
   <metal:content fill-slot="content">
-<div class="container-fluid">
-      <div class="row-fluid">
+    <div class="container">
+      <div class="row">
         <div class="span3">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
@@ -31,13 +31,6 @@
           </div>
         </div><!--/span-->
       </div><!--/row-->
-
-      <hr>
-
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
-
     </div>
   </metal:content>
 </body>

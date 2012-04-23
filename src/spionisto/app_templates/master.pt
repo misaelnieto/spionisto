@@ -3,7 +3,7 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="en" 
+      lang="en"
       metal:define-macro="main"
       i18n:domain="spionisto">
   <head>
@@ -28,17 +28,24 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#" 
+          <a class="brand" href="#"
              tal:attributes="href view/application_url">Spionisto</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="active">
-                <a href="#" tal:attributes="href string:${view/application_url}/list">Camera List</a>
+              <li>
+                <a href="#about" 
+                   tal:attributes="href string:${view/application_url}/cpanel"
+                   i18n:translate="">
+                   Control Panel
+                </a>
               </li>
               <li>
-                <a href="#about" tal:attributes="href string:${view/application_url}/cpanel">Control Panel</a>
+                <a href="#contact" 
+                   tal:attributes="href string:${view/application_url}/about"
+                   i18n:translate="">
+                   About
+                </a>
               </li>
-              <li><a href="#contact" tal:attributes="href string:${view/application_url}/about">About</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -46,5 +53,12 @@
     </div>
 
     <metal:content define-slot="content"/>
+
+    <div class="container">
+      <footer class="footer">
+        <hr/>
+        <p>Copyright &copy; Noe Nieto 2012</p>
+      </footer>
+    </div>
   </body>
 </html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@master/macros/main"
+      i18n:domain="logografo">
+<body>
+  <metal:content fill-slot="content">
+    <div class="container">
+      <div class="hero-unit">
+        <h1>Acerca de Spionisto</h1>
+        <p>
+          Spionisto es un software de monitoreo de cámaras de seguridad. Está 
+          hecho con Software Libre y fue escrito específicamente para comprobar 
+          la tesis <b>Sistema de Vigilancia con video sobre redes TCP/IP</b> 
+          para obtener el título de <b>Ingeniería en Electrónica</b> por parte 
+          del <b>Instituto Tecnológico de Puebla</b>.
+        </p>
+        <p>
+          El código fuente de éste proyecto se encuentra disponible al público
+          en la siguiente dirección web: 
+          <a href="http://github.com/tzicatl/spionisto">http://github.com/tzicatl/spionisto</a>.
+        </p>
+        <p>El software usado para construir esta aplicación es:</p>
+        <ul>
+          <li>Python como lenguaje de programación</li>
+          <li>zc.buildout para ensamblar la aplicación web</li>
+          <li>Grok como framework web</li>
+          <li>Supervisord para control de procesos</li>
+          <li>GStreamer para procesamiento de video</li>
+        </ul>
+      </div>
+      <hr>
+    </div>
+  </metal:content>
+</body>
+</html>
