@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@master/macros/main"
+      i18n:domain="logografo">
+<body>
+  <metal:content fill-slot="content">
+    <div class="container">
+      <section id="form">  
+        <div class="page-header" tal:condition="view/label">
+          <h1 tal:content="view/label">Form</h1>
+        </div>
+
+        <form action="." tal:attributes="action request/URL" method="post"
+              class="form-horizontal" enctype="multipart/form-data">
+          <label tal:content="view/label"></label>
+          <div class="form-status"
+            tal:define="status view/status"
+            tal:condition="status">
+
+            <div tal:content="view/status">
+              Form status summary
+            </div>
+
+            <ul class="errors" tal:condition="view/errors">
+              <li tal:repeat="error view/error_views">
+                <span tal:replace="structure error">Error Type</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="control-group" 
+               tal:repeat="widget view/widgets">
+            <label class="control-label" for="xx"
+                   tal:attributes="for widget/name">
+              <span tal:replace="widget/label">label</span>
+            </label>
+
+            <div class="controls">
+              <input type="text" tal:replace="structure widget"/>
+              <p class="help-block" tal:content="widget/hint"></p>
+              <span class="help-inline" 
+                    tal:content="structure widget/error"
+                    tal:condition="widget/error">
+                Please correct the error
+              </span>
+            </div>
+          </div>
+
+          <div class="form-actions" tal:condition="view/availableActions">
+            <input tal:repeat="action view/actions"
+                   tal:replace="structure action/render"
+              />
+          </div>
+        </form>
+      </section>
+    </div>
+  </metal:content>
+</body>
+</html>
