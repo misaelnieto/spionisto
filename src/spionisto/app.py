@@ -2,6 +2,8 @@ from zope.interface import Interface
 import grok
 
 from spionisto import resource
+from spionisto import supervisor
+
 
 class Spionisto(grok.Application, grok.Container):
     pass
@@ -28,7 +30,6 @@ class Index(grok.View):
             return 'active'
 
         return ''
-
 
 
 class About(grok.View):

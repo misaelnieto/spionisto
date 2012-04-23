@@ -11,6 +11,7 @@
     <div class="container">
       <div class="row">
         <div class="span3">
+          
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header" i18n:translate="">Cameras</li>
@@ -24,6 +25,22 @@
               </li>
             </ul>
           </div><!--/.well -->
+
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header" i18n:translate="">Supervisor status</li>
+              <li tal:define="status context/@@supervisor/status">
+                <div class="alert alert-success" tal:condition="status/online"
+                     i18n:translate="">
+                  <strong>On line</strong>
+                </div>
+                <div class="alert alert-error" tal:condition="not: status/online">
+                  <strong>Off line</strong>
+                </div>
+              </li>
+            </ul>
+          </div><!--/.well -->
+
         </div><!--/span-->
         <div class="span9">
           <div class="hero-unit">
