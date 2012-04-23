@@ -1,0 +1,27 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				".codeintel",
+				"bin",
+				"Mailer",
+				"develop-eggs",
+				"doc_out",
+				"extends-cache",
+				"log",
+				"parts",
+				"var",
+				".installed.cfg"
+			],
+			"path": "/home/tzicatl/Aplicaciones/Codigo/tesis_gstreamer/spionisto"
+		},
+		{
+			"path": "parts/omelette/spionisto"
+		},
+		{
+			"path": "parts/omelette"
+		}
+	]
+}
