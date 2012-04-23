@@ -77,4 +77,28 @@ class AddForm(grok.AddForm):
         self.context[camera_id] = new_camera
         grok.notify(grok.ObjectAddedEvent(new_camera))
 
-        return self.redirect(self.url(new_camera))
+        self.flash(_(u'Added new camera'))
+        return self.redirect(self.application_url())
+
+class EditForm(grok.EditForm):
+    grok.context(ICamera)
+    form_fields = grok.AutoFields(ICamera)
+    template = grok.PageTemplateFile('camera_templates/form.pt')
+    
+    label = _(u'Edit a camera')
+
+    def update(self):
+        resource.style.need()
+
+    @grok.action(_(u'Save changes'))
+    def add_camera(self, **data):
+        self.applyData(self.context, **data)
+        grok.notify(grok.ObjectModifiedEvent(self.context))
+
+        self.flash(_(u'Changes were saved'))
+        return self.redirect(self.application_url())
+
+    @grok.action(_(u'Cancel'))
+    def handle_cancel(self, **data):
+        self.flash(_(u'Cancel edition'))
+        return self.redirect(self.application_url())
