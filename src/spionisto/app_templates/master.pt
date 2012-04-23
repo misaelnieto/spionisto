@@ -34,7 +34,7 @@
             <ul class="nav">
               <li>
                 <a href="#about" 
-                   tal:attributes="href string:${view/application_url}/cpanel"
+                   tal:attributes="href string:${view/application_url}/controlpanel"
                    i18n:translate="">
                    Control Panel
                 </a>

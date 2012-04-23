@@ -17,7 +17,12 @@ class Index(grok.View):
     def update(self):
         resource.style.need()
 
+
 class About(grok.View):
     def update(self):
         resource.style.need()
-    
+
+
+class ControlPanel(grok.View):
+    def update(self):
+        resource.style.need()

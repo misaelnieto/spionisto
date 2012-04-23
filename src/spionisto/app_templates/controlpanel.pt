@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/@@master/macros/main"
+      i18n:domain="logografo">
+<body>
+  <metal:content fill-slot="content">
+    <div class="container">
+      <section id="cameras">
+        <div class="page-header">
+          <h1>List of cameras <small>Create, edit & delete cameras</small></h1>
+        </div>
+
+        <div class="btn-toolbar">
+          <a href="add" class="btn btn-primary"
+             tal:attributes="href python:view.url('addform')"
+             i18n:translate="">Add camera</a>
+        </div>
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th i18n:translate="">Camera id</th>
+              <th i18n:translate="">Text</th>
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Bla bla lba</td>
+              <td>edit</td>
+              <td>delete</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="btn-toolbar">
+          <a href="add" class="btn btn-primary"
+             tal:attributes="href python:view.url('addform')"
+             i18n:translate="">Add camera</a>
+        </div>
+
+      </section>
+    </div>
+  </metal:content>
+</body>
+</html>
