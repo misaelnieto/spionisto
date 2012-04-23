@@ -14,8 +14,21 @@ class Master(grok.View):
 
 
 class Index(grok.View):
-    def update(self):
+    selected_camera = '0'
+
+    def update(self, selected=None):
         resource.style.need()
+        if selected in self.context:
+            self.selected_camera = selected
+        else:
+            self.selected_camera = '0'
+
+    def li_class(self, camera_id):
+        if camera_id == self.selected_camera:
+            return 'active'
+
+        return ''
+
 
 
 class About(grok.View):

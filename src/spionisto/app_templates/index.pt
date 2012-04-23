@@ -14,20 +14,26 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header" i18n:translate="">Cameras</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+              <li tal:repeat="camera_id context/keys"
+                  tal:attributes="class python: view.li_class(camera_id)">
+                <a href="#"
+                   tal:attributes="href python:view.url(context, data={'selected':camera_id})">
+                   <span class="label label-info"  tal:content="camera_id"/>
+                   <span tal:replace="context/?camera_id/overlay_text"/>
+                </a>
+              </li>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span9">
           <div class="hero-unit">
-            <h1>Camera Number 10</h1>
+            <h1>Camera <span tal:replace="view/selected_camera"/></h1>
+            <h2 tal:content="python: context[view.selected_camera].overlay_text">Foo bar</h2>
 
-            <img src="xxx.jpg" alt="Camera offline" width="640" height="480">
+            <div class="thumbnail">
+              <img src="xxx.jpg" alt="Camera offline" width="640" height="480" />
+            </div>
 
-            <p><a class="btn btn-primary btn-large">Learn more »</a></p>
           </div>
         </div><!--/span-->
       </div><!--/row-->
