@@ -24,16 +24,22 @@
             <tr>
               <th i18n:translate="">Camera id</th>
               <th i18n:translate="">Text</th>
-              <th>&nbsp;</th>
+              <th i18n:translate="">Camera model</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Bla bla lba</td>
-              <td>edit</td>
-              <td>delete</td>
+            <tr tal:repeat="camera_id context/keys">
+              <td tal:content="camera_id">1</td>
+              <td tal:content="context/?camera_id/overlay_text">Foo bar</td>
+              <td tal:content="context/?camera_id/camera_model">edit</td>
+              <td>
+                <a href="#" class="btn btn-inverse btn-mini"
+                   i18n:translate=""
+                   tal:attributes="href string:${view/application_url}/${camera_id}/editform">
+                   Edit
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>
