@@ -2,13 +2,6 @@
 Spionisto server software
 =========================
 
-LICENSE
--------
-
-Please, do read the LICENSE.txt file to find out about restricted use of this
-software. Because that restrictions, this software cannot be regarded as fully 
-free software or open source
-
 DESCRIPTION
 -----------
 
@@ -32,4 +25,7 @@ Grab a copy of this repo and run:
 
 After finished run:
 
-    ?????
+    bin/supervisord
+
+and open this in your browser: http://localhost:8080
+

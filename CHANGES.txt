@@ -1,0 +1,8 @@
+Changelog
+=========
+
+0.1 (unreleased)
+-------------------
+
+- Created package using grokproject. 
+- Added scaffolding and basic models for cameras.
