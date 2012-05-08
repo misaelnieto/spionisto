@@ -1,47 +1,19 @@
-from zope import schema
-from zope.interface import Interface
-from zope.schema.fieldproperty import FieldProperty
 import grok
+from zope.schema.fieldproperty import FieldProperty
+
 
 from spionisto import resource
-from spionisto.app import Spionisto
 from spionisto import SpionistoMessageFactory as _
+from spionisto.app import Spionisto
+from spionisto import CAMERA_TYPES
+from spionisto.interfaces import (
+    ICamera,
+    ICameraGstreamerPipeline,
+    ICameraStreamURL
+)
+import spionisto.gstreamer
 
-CAMERA_TYPES = [
-    'Dummy (GStreamer)',
-    'Linksys Cisco - WVC54G'
-]
 
-class ICamera(Interface):
-    id = schema.Int(
-        title=_(u'Camera Id'),
-        description=_(u'Camera ID is used to dynamically assign ports'),
-        readonly=True
-    )
-    overlay_text = schema.TextLine(
-        title = _(u'Overlay text'),
-        description = _(u'This text will be overlaid in the top of the video. Text cannot be longer than 80 chars.'),
-        max_length = 80
-    )
-    hostname = schema.ASCIILine(
-        title = _(u'Hostname or IP Address'),
-        description = _(u'This is the hostname or the IP address of the IP camera'), 
-    )
-    camera_model = schema.Choice(
-        title = _(u'Select camera model'),
-        description = _(u'Select one camera from the list of supported models'),
-        values = CAMERA_TYPES
-    )
-
-    def snapshot_url():
-        """
-        Returns the url for a snapshot of the camera.
-        """
-
-    def mjpeg_stream_url():
-        """
-        Returns a url for the MJPEG stream of this camera
-        """
 
 class Camera(grok.Model):
     grok.implements(ICamera)
@@ -50,8 +22,9 @@ class Camera(grok.Model):
     hostname = FieldProperty(ICamera['hostname'])
     camera_model = FieldProperty(ICamera['camera_model'])
 
-    def mjpeg_stream_url(self):
-        return 'http://localhost:1337/mjpeg'
+    def mpeg_stream_url():
+        from spionisto.tools import ICameraStreamURL
+        return ICameraStreamURL(self).mjpeg()
 
 
 class Index(grok.View):
@@ -60,6 +33,8 @@ class Index(grok.View):
     def render(self):
         return str (self.context)
 
+##############################################################################
+## Forms
 
 class CameraAddForm(grok.AddForm):
     grok.context(Spionisto)
@@ -105,3 +80,27 @@ class EditForm(grok.EditForm):
     def handle_cancel(self, **data):
         self.flash(_(u'Cancel edition'))
         return self.redirect(self.application_url())
+
+
+#############################################################################
+## Adapters
+
+class PipelineAdapter(grok.Adapter):
+    grok.context(ICamera)
+    grok.provides(ICameraGstreamerPipeline)
+
+    def pipeline(self):
+        if self.context.camera_model == CAMERA_TYPES[0]:
+            return spionisto.gstreamer.dummy.pipeline(self.context)
+        else: #Assume linksys
+            return spionisto.gstreamer.wvc54g.pipeline(self.context)
+
+
+class StreamUrlAdapter(grok.Adapter):
+    grok.context(ICamera)
+    grok.provides(ICameraStreamURL)
+
+    def mjpeg(self):
+        return 'http://localhost:%i/mjpeg_stream'% (
+            MJPEG_PORTBASE + context.id
+        )

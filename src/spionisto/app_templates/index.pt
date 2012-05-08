@@ -11,7 +11,7 @@
     <div class="container">
       <div class="row">
         <div class="span3">
-          
+
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <li class="nav-header" i18n:translate="">Cameras</li>
@@ -52,7 +52,8 @@
             <h2 tal:content="python: context[view.selected_camera].overlay_text">Foo bar</h2>
 
             <div class="thumbnail">
-              <img src="http://localhost:1337/mjpeg_stream" alt="Camera offline" width="640" height="480" />
+              <img src="http://localhost:1337/mjpeg_stream" alt="Camera offline" width="640" height="480"
+                   tal:attributes="src context[view.selected_camera].mpeg_stream_url()"/>
             </div>
 
           </div>

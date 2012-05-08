@@ -1,36 +1,24 @@
 #Python
 import random
 
-#Zope & Grok
-from zope.interface import Interface
-import grok
+from spionisto import TCP_PORT_BASE
 
-#Spionisto
-from spionisto.camera import ICamera, CAMERA_TYPES
-from .interfaces import IGStreamerPipeline
-
-
-PATTERNS = ['smpte', 'snow', 'black', 'white', 'red', 'green', 'blue', 
+_PATTERNS = ['smpte', 'snow', 'black', 'white', 'red', 'green', 'blue', 
             'checkers-1', 'checkers-2', 'checkers-4', 'checkers-8',
             'circular', 'blink', 'smpte75', 'zone-plate', 'gamut',
             'chroma-zone-plate', 'solid-color', 'ball', 'smpte100',
             'bar']
 
-_DUMMY_PIPELINE = "videotestsrc pattern=%s ! video/x-raw-rgb, framerate=15/1,"\
-                  " width=640, height=480 !  jpegenc ! multipartmux boundary=spionisto ! "\
-                  "tcpclientsink port=%s"
+_DUMMY_PIPELINE = 'videotestsrc pattern=%s ! video/x-raw-rgb, framerate=15/1, width=640, height=480 !  '\
+                  'clockoverlay text="%s" valign=bottom shaded-background=true font-desc="Courier bold 24" ! '\
+                  'jpegenc ! multipartmux boundary=spionisto ! '\
+                  'tcpclientsink port=%s'
 
-_LINKSYS_PIPELINE = "souphttpsrc location=%s ! asfdemux ! decodebin2"\
-                    "video/x-raw-rgb, framerate=15/1, width=640, height=480 ! "\
-                    "jpegenc ! multipartmux boundary=spionisto ! "\
-                    "tcpclientsink port=%s"
 
-class PipelineAdapter(grok.Adapter):
-    grok.context(ICamera)
-    grok.provides(IGStreamerPipeline)
+__all__ = ['pipeline']
 
-    def pipeline(self, port):
-        if self.context.camera_model == CAMERA_TYPES[0]:
-            return _DUMMY_PIPELINE %(random.choice(PATTERNS), port)
-        else: #Assume linksys
-            return _LINKSYS_PIPELINE %(self.context.media_stream_uri, port)
+def pipeline(context):
+    return _DUMMY_PIPELINE %(
+        random.choice(_PATTERNS), context.overlay_text, 
+        TCP_PORT_BASE + context.id
+    )
