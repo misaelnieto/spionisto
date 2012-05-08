@@ -16,7 +16,7 @@
 
         <div class="btn-toolbar">
           <a href="add" class="btn btn-primary"
-             tal:attributes="href python:view.url('addform')"
+             tal:attributes="href python:view.url('add')"
              i18n:translate="">Add camera</a>
         </div>
         <table class="table table-bordered table-striped">
@@ -45,7 +45,7 @@
         </table>
         <div class="btn-toolbar">
           <a href="add" class="btn btn-primary"
-             tal:attributes="href python:view.url('addform')"
+             tal:attributes="href python:view.url('add')"
              i18n:translate="">Add camera</a>
         </div>
 

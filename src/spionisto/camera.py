@@ -9,18 +9,23 @@ from spionisto import SpionistoMessageFactory as _
 
 CAMERA_TYPES = [
     'Dummy (GStreamer)',
-    'Linksys'
+    'Linksys Cisco - WVC54G'
 ]
 
 class ICamera(Interface):
+    id = schema.Int(
+        title=_(u'Camera Id'),
+        description=_(u'Camera ID is used to dynamically assign ports'),
+        readonly=True
+    )
     overlay_text = schema.TextLine(
         title = _(u'Overlay text'),
         description = _(u'This text will be overlaid in the top of the video. Text cannot be longer than 80 chars.'),
         max_length = 80
     )
-    media_stream_uri = schema.URI(
-        title = _(u'Media stream URI'),
-        description = _(u'This is the URL where the video stream is available'), 
+    hostname = schema.ASCIILine(
+        title = _(u'Hostname or IP Address'),
+        description = _(u'This is the hostname or the IP address of the IP camera'), 
     )
     camera_model = schema.Choice(
         title = _(u'Select camera model'),
@@ -42,11 +47,8 @@ class Camera(grok.Model):
     grok.implements(ICamera)
 
     overlay_text = FieldProperty(ICamera['overlay_text'])
-    media_stream_uri = FieldProperty(ICamera['media_stream_uri'])
+    hostname = FieldProperty(ICamera['hostname'])
     camera_model = FieldProperty(ICamera['camera_model'])
-
-    def snapshot_url(self):
-        return 'http://localhost:1337/snapshot'
 
     def mjpeg_stream_url(self):
         return 'http://localhost:1337/mjpeg'
@@ -59,23 +61,24 @@ class Index(grok.View):
         return str (self.context)
 
 
-class AddForm(grok.AddForm):
+class CameraAddForm(grok.AddForm):
     grok.context(Spionisto)
-    form_fields = grok.AutoFields(ICamera)
+    grok.name('add')
+    form_fields = grok.AutoFields(ICamera).omit('id')
     template = grok.PageTemplateFile('camera_templates/form.pt')
 
     label = _(u'Add a new camera')
 
     def update(self):
         resource.style.need()
+        resource.validation_js.need()
 
     @grok.action(_(u'Add camera'))
     def add_camera(self, **data):
         new_camera = Camera()
         self.applyData(new_camera, **data)
-        camera_id = str(len(self.context))
+        camera_id = len(self.context)
         self.context[camera_id] = new_camera
-        grok.notify(grok.ObjectAddedEvent(new_camera))
 
         self.flash(_(u'Added new camera'))
         return self.redirect(self.application_url())

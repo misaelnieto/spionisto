@@ -43,12 +43,16 @@
 
         </div><!--/span-->
         <div class="span9">
-          <div class="hero-unit">
+          <div class="hero-unit" tal:condition="not:context">
+            <h1 i18n:translate="">No cameras</h1>
+            <p i18n:translate="">Add one in the control panel.</p>
+          </div>
+          <div class="hero-unit" tal:condition="context">
             <h1>Camera <span tal:replace="view/selected_camera"/></h1>
             <h2 tal:content="python: context[view.selected_camera].overlay_text">Foo bar</h2>
 
             <div class="thumbnail">
-              <img src="xxx.jpg" alt="Camera offline" width="640" height="480" />
+              <img src="http://localhost:1337/mjpeg_stream" alt="Camera offline" width="640" height="480" />
             </div>
 
           </div>

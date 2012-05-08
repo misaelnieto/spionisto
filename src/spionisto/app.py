@@ -6,7 +6,10 @@ from spionisto import supervisor
 
 
 class Spionisto(grok.Application, grok.Container):
-    pass
+    def __setitem__(self, key, obj):
+        #automatic id
+        obj.id = key
+        super(Spionisto, self).__setitem__(str(key), obj)
 
 class Master(grok.View):
     """
