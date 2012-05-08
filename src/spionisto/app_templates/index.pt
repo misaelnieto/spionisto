@@ -53,7 +53,7 @@
 
             <div class="thumbnail">
               <img src="http://localhost:1337/mjpeg_stream" alt="Camera offline" width="640" height="480"
-                   tal:attributes="src context[view.selected_camera].mpeg_stream_url()"/>
+                   tal:attributes="src python:context[view.selected_camera].mpeg_stream_url()"/>
             </div>
 
           </div>

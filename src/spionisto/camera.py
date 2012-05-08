@@ -5,7 +5,10 @@ from zope.schema.fieldproperty import FieldProperty
 from spionisto import resource
 from spionisto import SpionistoMessageFactory as _
 from spionisto.app import Spionisto
-from spionisto import CAMERA_TYPES
+from spionisto import (
+    CAMERA_TYPES,
+    MJPEG_PORT_BASE
+)
 from spionisto.interfaces import (
     ICamera,
     ICameraGstreamerPipeline,
@@ -22,8 +25,7 @@ class Camera(grok.Model):
     hostname = FieldProperty(ICamera['hostname'])
     camera_model = FieldProperty(ICamera['camera_model'])
 
-    def mpeg_stream_url():
-        from spionisto.tools import ICameraStreamURL
+    def mpeg_stream_url(self):
         return ICameraStreamURL(self).mjpeg()
 
 
@@ -102,5 +104,5 @@ class StreamUrlAdapter(grok.Adapter):
 
     def mjpeg(self):
         return 'http://localhost:%i/mjpeg_stream'% (
-            MJPEG_PORTBASE + context.id
+            MJPEG_PORT_BASE + self.context.id
         )
