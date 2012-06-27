@@ -1,0 +1,35 @@
+[inet_http_server]
+port = ${port}
+username = admin
+password = admin
+
+[supervisord]
+logfile = ${buildout:directory}/var/log/supervisord.log
+childlogdir = ${buildout:directory}/var/log
+logfile_maxbytes = 50MB
+logfile_backups = 10
+loglevel = info
+pidfile = ${buildout:directory}/var/supervisord.pid
+umask = 022
+nodaemon = false
+nocleanup = false
+
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory=supervisor.rpcinterface:make_main_rpcinterface
+
+[rpcinterface:twiddler]
+supervisor.rpcinterface_factory = supervisor_twiddler.rpcinterface:make_twiddler_rpcinterface
+
+[supervisorctl]
+serverurl = http://localhost:${port}
+username = admin
+password = admin
+
+[program:grok]
+command = ${buildout:directory}/bin/daemon 
+process_name = grok
+directory = ${buildout:directory}
+priority = 10
+redirect_stderr = true
+
+                                                                
