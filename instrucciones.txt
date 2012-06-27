@@ -1,0 +1,2 @@
+bin/supervisord -c parts/etc/supervisord.ini
+bin/paster serve parts/etc/debug.ini
