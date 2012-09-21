@@ -25,11 +25,12 @@ serverurl = http://localhost:${port}
 username = admin
 password = admin
 
+[group:dynamic]
+priority=999
+
 [program:grok]
-command = ${buildout:directory}/bin/daemon 
+command = ${buildout:directory}/bin/daemon
 process_name = grok
 directory = ${buildout:directory}
 priority = 10
 redirect_stderr = true
-
-                                                                
