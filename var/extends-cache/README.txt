@@ -1,0 +1,1 @@
+This directory contains the download cache for buildout.
