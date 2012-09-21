@@ -38,6 +38,7 @@ dist/
 .installed.cfg
 bin/
 develop-eggs/
+eggs/
 extends-cache/
 parts/
 var/
