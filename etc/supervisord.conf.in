@@ -29,7 +29,7 @@ password = admin
 priority=999
 
 [program:grok]
-command = ${buildout:directory}/bin/daemon
+command = ${buildout:directory}/bin/paster serve ${buildout:directory}/parts/etc/deploy.ini --pid-file=${buildout:directory}/var/run/paster.pid
 process_name = grok
 directory = ${buildout:directory}
 priority = 10
